@@ -1,58 +1,52 @@
-/* -------------------------------- start of trendy sction */
+/* -------------------------------- start of categories sction */
 
 .section-title {
     padding: 30px 0;
 }
 
-.recipes-grid {
+.categories-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, 300px);
     gap: 30px;
 }
 
-.recipe-card {
+.category-card {
     display: grid;
     grid-template-rows: subgrid;
-    grid-row: span 3;
+    grid-row: span 2;
     gap: 0;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 10px 15px 25px var(--light-beige);
-    padding-bottom: 15px;
+    text-align: center;
+    cursor: pointer;
 }
 
-.recipe-image {
+.category-image {
     width: 100%;
     min-height: 300px;
     object-fit: cover;
+    grid-row: span 2;
 }
 
-.recipe-info .user-wrapper {
-    width: 35px;
-    height: 35px;
+
+.category-name-container {
+    background-color: rgba(0, 0, 0, 0.644);
+    padding-block: 15px;
 }
 
-.recipe-info .fa-user {
-    font-size: 20px;
-}
-
-.recipe-info {
-    display: flex;
-    justify-content: space-between;
-    padding-inline: 8px;
-}
-
-.recipe-name {
+.category-name {
     font-size: 1.8rem;
     padding: 10px 8px;
+    color: white;
 }
 
 @media screen and (width <660px) {
-    .recipes-grid {
+    .categories-grid {
         grid-template-columns: 1fr 1fr;
     }
 
-    .recipe-name {
+    .category-name {
         font-size: 1.3rem;
     }
 

@@ -1,0 +1,20 @@
+* {
+    color: #3C221A;
+    border: none;
+    outline: none;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --light-beige: #FBE8C9;
+    --dark-beige: #F3C596;
+    --brown: #3C221A;
+    --brown-border: #3c221a69;
+}
+
+.wrapper {
+    margin: auto;
+    width: min(1280px, 98%);
+}

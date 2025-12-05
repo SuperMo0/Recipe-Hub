@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="header.css">
+    <link rel="stylesheet" href="normal.css">
+    <link rel="stylesheet" href="create.css">
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="icon.css">
+</head>
+
+<body>
+    <%- include('./partials/header.ejs') %>
+
+        <section>
+            <div class="wrapper">
+                <h1 class="section-title">Add a New Recipe</h1>
+
+                <form class="create-recipe-grid">
+
+
+                    <div class="recipe-title-container">
+                        <label class="input-label" for="recipe_title">Recipe Title</label>
+                        <input placeholder="e.g., Grandma's Apple Pie" type="text" name="recipe_title"
+                            id="recipe_title">
+                    </div>
+
+                    <div class="recipe-image-container">
+                        <p class="input-label">Recipe Image</p>
+                        <label class="upload-container" for="recipe_image">
+                            <i class="fa-solid fa-upload"></i>
+                            <p class="upload-text">Drag and Drop or <span>Upload Photo</span> </p>
+                            <p class="uploade-file-name"></p>
+                        </label>
+                        <input type="file" name="recipe_image" id="recipe_image">
+                    </div>
+
+                    <div class="preperation-time-container">
+                        <p class="input-label">Preperation Time</p>
+
+                        <input value="0" type="number" id="hours" name="hours">
+                        <label class="hours-label" for="hours">Hours</label>
+
+                        <input onchange="fix()" type="number" id="minuts" name="minus" max="59">
+                        <label class="minuts-label" for="minuts">Minuts</label>
+                        <script>
+                            function fix() {
+                                let input = document.getElementById('minuts');
+                                if (input.value > 59) input.value = 59;
+                            }
+                        </script>
+                    </div>
+
+                    <div class="category-container">
+                        <label for="category" class="input-label">Category</label>
+                        <select name="category" id="category">
+                            <option value="">Italian</option>
+                            <option value="">Middle East</option>
+                            <option value="">Pasta</option>
+                        </select>
+                        <p class="create-category-button">+ create new category</p>
+                    </div>
+
+                    <div class="nested-form-container">
+                        <form id="create-category-form">
+                            <input placeholder="New Category" type="text" id="category_name"
+                                form="create-category-form">
+                            <label for="new_category_image">upload</label>
+                            <input form="create-category-form" type="file" id="new_category_image"
+                                name="new_category_image">
+                        </form>
+                    </div>
+
+                </form>
+
+            </div>
+
+
+        </section>
+
+
+
+
+</body>
+
+</html>
