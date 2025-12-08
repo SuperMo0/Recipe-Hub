@@ -1,132 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="create.css">
+<script src="createScript.js" defer></script>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="header.css">
-    <link rel="stylesheet" href="normal.css">
-    <link rel="stylesheet" href="create.css">
-    <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="icon.css">
-    <script src="createScript.js" defer></script>
-</head>
+<div hide="true" class="loading-page">
+    <div class="loader"></div>
+</div>
+<section>
+    <div class="wrapper">
+        <h1 class="section-title">Add a New Recipe</h1>
 
-<body>
-    <%- include('partials/header.ejs',{page:'create'}) %>
+        <form class="create-recipe-grid" method="post" action="/create" enctype="multipart/form-data">
 
-        <div hide="true" class="loading-page">
-            <div class="loader"></div>
-        </div>
-        <section>
-            <div class="wrapper">
-                <h1 class="section-title">Add a New Recipe</h1>
+            <div class=" recipe-title-container">
+                <label class="input-label" for="recipe_name">Recipe Title</label>
+                <input required maxlength="100" placeholder="e.g., Grandma's Apple Pie" type="text" name="recipe_name"
+                    id="recipe_name">
+            </div>
 
-                <form class="create-recipe-grid" method="post" action="/create" enctype="multipart/form-data">
+            <div class="recipe-image-container">
+                <p class="input-label">Recipe Image</p>
+                <label class="upload-container" for="recipe_image">
+                    <i class="fa-solid fa-upload"></i>
+                    <p class="upload-text">Drag and Drop or <span>Upload Photo</span> </p>
+                    <p class="uploda-instructions"> .png .jpeg .jpeg Max size 2MB</p>
+                    <p class="uploaded-file-name"></p>
+                </label>
+                <input onchange="validateUpload(this)" type="file" name="recipe_image" id="recipe_image"
+                    accept="image/png, image/jpeg">
+            </div>
 
-                    <div class=" recipe-title-container">
-                        <label class="input-label" for="recipe_name">Recipe Title</label>
-                        <input required maxlength="100" placeholder="e.g., Grandma's Apple Pie" type="text"
-                            name="recipe_name" id="recipe_name">
+            <div class="preperation-time-container">
+                <p class="input-label">Preperation Time</p>
+
+                <div class="time-input-wrapper">
+                    <div class="hours-wrapper">
+                        <input required value="0" type="number" id="hours" name="hours">
+                        <label class="hours-label" for="hours">Hours</label>
                     </div>
-
-                    <div class="recipe-image-container">
-                        <p class="input-label">Recipe Image</p>
-                        <label class="upload-container" for="recipe_image">
-                            <i class="fa-solid fa-upload"></i>
-                            <p class="upload-text">Drag and Drop or <span>Upload Photo</span> </p>
-                            <p class="uploda-instructions"> .png .jpeg .jpeg Max size 2MB</p>
-                            <p class="uploaded-file-name"></p>
-                        </label>
-                        <input onchange="validateUpload(this)" type="file" name="recipe_image" id="recipe_image"
-                            accept="image/png, image/jpeg">
+                    <div class="minuts-wrapper">
+                        <input required value="0" onchange="fix()" type="number" id="minuts" name="minuts" max="59">
+                        <label class="minuts-label" for="minuts">Minuts</label>
                     </div>
+                </div>
 
-                    <div class="preperation-time-container">
-                        <p class="input-label">Preperation Time</p>
+                <script>
+                    function fix() {
+                        let input = document.getElementById('minuts');
+                        if (input.value > 59) input.value = 59;
+                    }
+                </script>
+            </div>
 
-                        <div class="time-input-wrapper">
-                            <div class="hours-wrapper">
-                                <input required value="0" type="number" id="hours" name="hours">
-                                <label class="hours-label" for="hours">Hours</label>
-                            </div>
-                            <div class="minuts-wrapper">
-                                <input required value="0" onchange="fix()" type="number" id="minuts" name="minuts"
-                                    max="59">
-                                <label class="minuts-label" for="minuts">Minuts</label>
-                            </div>
+            <div class="category-container">
+                <label for="category_id" class="input-label">Category</label>
+                <select name="category_id" id="category_id">
+
+                    <% categories.forEach(element=> { %>
+                        <option value="<%= element.id %>">
+                            <%= element.category_name %>
+                        </option>
+                        <% }) %>
+
+                </select>
+                <p onclick="showNewCategory(this)" class="create-category-button">+ create new category</p>
+            </div>
+
+            <div class="new-category-container">
+                <label for="category_name" class="input-label">New Category</label>
+                <input required disabled name="category_name" placeholder="Category" type="text" id="category_name">
+                <button onclick="hideNewCategory(this)" type="button" class="create-category-commit">cancel</button>
+            </div>
+
+            <div class="ingredient-container">
+                <p class="input-label">Ingredient</p>
+                <div class="add-ingredient-wrapper">
+                    <input type="text" id="ingredient_name">
+                    <button type="button" class="add-new-ingredient">+Add Ingredient</button>
+                </div>
+                <ol>
+                    <template id="single-ingredient-templte">
+                        <div class="single-ingredient-wrapper">
+                            <li class="single-ingredient">
+                                <span class="order"></span>
+                                <input readonly type="text" name="recipe_ingredients[]">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </li>
+                            <hr>
                         </div>
-
-                        <script>
-                            function fix() {
-                                let input = document.getElementById('minuts');
-                                if (input.value > 59) input.value = 59;
-                            }
-                        </script>
-                    </div>
-
-                    <div class="category-container">
-                        <label for="category_id" class="input-label">Category</label>
-                        <select name="category_id" id="category_id">
-
-                            <% categories.forEach(element=> { %>
-                                <option value="<%= element.id %>">
-                                    <%= element.category_name %>
-                                </option>
-                                <% }) %>
-
-                        </select>
-                        <p onclick="showNewCategory(this)" class="create-category-button">+ create new category</p>
-                    </div>
-
-                    <div class="new-category-container">
-                        <label for="category_name" class="input-label">New Category</label>
-                        <input required disabled name="category_name" placeholder="Category" type="text"
-                            id="category_name">
-                        <button onclick="hideNewCategory(this)" type="button"
-                            class="create-category-commit">cancel</button>
-                    </div>
-
-                    <div class="ingredient-container">
-                        <p class="input-label">Ingredient</p>
-                        <div class="add-ingredient-wrapper">
-                            <input type="text" id="ingredient_name">
-                            <button type="button" class="add-new-ingredient">+Add Ingredient</button>
-                        </div>
-                        <ol>
-                            <template id="single-ingredient-templte">
-                                <div class="single-ingredient-wrapper">
-                                    <li class="single-ingredient">
-                                        <span class="order"></span>
-                                        <input readonly type="text" name="recipe_ingredients[]">
-                                        <i class="fa-solid fa-trash-can"></i>
-                                    </li>
-                                    <hr>
-                                </div>
-                            </template>
-                        </ol>
-
-                    </div>
-
-                    <div class="recipe-instructions-container">
-                        <label class="input-label" for="recipe_instructions">Instructions</label>
-                        <textarea required oninput="fixHeight(this)" name="recipe_instructions"
-                            id="recipe_instructions"></textarea>
-                    </div>
-
-                    <button type="submit" class="submit-button">Publish Recipe</button>
-
-                </form>
+                    </template>
+                </ol>
 
             </div>
 
+            <div class="recipe-instructions-container">
+                <label class="input-label" for="recipe_instructions">Instructions</label>
+                <textarea required oninput="fixHeight(this)" name="recipe_instructions"
+                    id="recipe_instructions"></textarea>
+            </div>
 
-        </section>
+            <button type="submit" class="submit-button">Publish Recipe</button>
+
+        </form>
+
+    </div>
 
 
-
-
-</body>
-
-</html>
+</section>

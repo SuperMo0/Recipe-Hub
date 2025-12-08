@@ -10,11 +10,13 @@
     <link rel="stylesheet" href="/header.css">
     <link rel="stylesheet" href="/normal.css">
     <title>Document</title>
+    <%- script %>
+        <%- style %>
 </head>
 
 <body>
-
-    <%- body %>
+    <%- include('partials/header.ejs',{pag}) %>
+        <%- body %>
 
 </body>
 

@@ -15,7 +15,7 @@ async function uploadImageBuffer(image) {
                 {
                     folder: 'testing',
                     transformation: {
-                        quality: 'auto',
+                        quality: 'auto:best',
                     }
                 },
                 (error, uploadResult) => {
@@ -35,7 +35,7 @@ async function uploadImageBuffer(image) {
 
 async function getRecipeBanner(image) {
     try {
-        let url = await cloudinary.url(image, { background: "auto", gravity: "auto", height: 300, width: 1280, crop: "fill_pad" })
+        let url = await cloudinary.url(image, { quality: 'auto', gravity: "auto", height: 300, width: 1280, crop: "fill" })
         return url;
     }
     catch (e) {

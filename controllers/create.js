@@ -7,13 +7,10 @@ const upload = require('./../services/cloudinary');
 async function renderCreateForm(req, res, next) {
     try {
         const categories = await queries.getCategories();
-        // console.log(categories);
-
-        res.render('create.ejs', { categories });
+        res.render('create.ejs', { categories, pag: 'create' });
     }
     catch (e) {
-        // res.render('error.ejs', { error });
-        res.send('error on fetch');
+        res.render('error', { error: 'Error please try again later' })
     }
 }
 

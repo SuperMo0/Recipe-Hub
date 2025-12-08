@@ -26,3 +26,7 @@ body {
     margin: auto;
     width: min(1280px, 98%);
 }
+
+img {
+    display: block;
+}

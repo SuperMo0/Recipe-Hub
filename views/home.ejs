@@ -1,54 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
+<link rel="stylesheet" href="/home.css">
+<script src="/homeScript.js" defer></script>
+<section>
+    <div class="wrapper">
+        <h1 class="section-title">Trendy Recipes</h1>
+        <div class="recipes-grid">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/home.css">
-    <link rel="stylesheet" href="/css/all.min.css">
-    <link rel="stylesheet" href="/time.css">
-    <link rel="stylesheet" href="/icon.css">
-    <link rel="stylesheet" href="/header.css">
-    <link rel="stylesheet" href="/normal.css">
-    <script src="/homeScript.js" defer></script>
-    <title>Document</title>
-</head>
+            <% recipes.forEach(element=> { %>
+                <div data-id="<%= element.id %>" class="recipe-card">
+                    <div class="recipe-image-wrapper">
+                        <img class='recipe-image' src=<%=element.recipe_image %> alt="The Main Dish">
+                    </div>
 
-<body>
-    <%- include('partials/header.ejs',{page:'home'}) %>
-
-        <section>
-            <div class="wrapper">
-                <h1 class="section-title">Trendy Recipes</h1>
-                <div class="recipes-grid">
-
-                    <% recipes.forEach(element=> { %>
-                        <div data-id="<%= element.id %>" class="recipe-card">
-                            <div class="recipe-image-wrapper">
-                                <img class='recipe-image' src=<%=element.recipe_image %> alt="The Main Dish">
-                            </div>
-
-                            <p class="recipe-name">
-                                <%= element.recipe_name%>
-                            </p>
-                            <div class="recipe-info">
-                                <%- include('partials/time.ejs',{hours:element.hours,minuts:element.minuts}) -%>
-                                    <%- include('partials/icon.ejs') %>
-                            </div>
-                        </div>
-
-                        <% }) %>
-
+                    <p class="recipe-name">
+                        <%= element.recipe_name%>
+                    </p>
+                    <div class="recipe-info">
+                        <%- include('partials/time.ejs',{hours:element.hours,minuts:element.minuts}) -%>
+                            <%- include('partials/icon.ejs') %>
+                    </div>
                 </div>
 
-            </div>
+                <% }) %>
+        </div>
+    </div>
+</section>
 
-
-        </section>
-
-
-
-
-</body>
-
-</html>
+<%- contentFor('page') %>
+    home
