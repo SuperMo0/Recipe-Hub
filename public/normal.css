@@ -12,6 +12,14 @@
     --dark-beige: #F3C596;
     --brown: #3C221A;
     --brown-border: #3c221a69;
+    --xxl: 1.8rem;
+    --xl: 1.5rem;
+    --l: 1.2rem;
+    --m: 1rem;
+}
+
+body {
+    background-color: #f0f0f0;
 }
 
 .wrapper {

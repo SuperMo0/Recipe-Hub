@@ -1,8 +1,48 @@
-function renderCreate(req, res) {
+const { log } = require('console');
+const stream = require('stream');
+const queries = require('./../db/queries');
+const upload = require('./../services/cloudinary');
 
-    res.render('create.ejs');
+
+async function renderCreateForm(req, res, next) {
+    try {
+        const categories = await queries.getCategories();
+        // console.log(categories);
+
+        res.render('create.ejs', { categories });
+    }
+    catch (e) {
+        // res.render('error.ejs', { error });
+        res.send('error on fetch');
+    }
 }
 
+async function handleCreateForm(req, res) {
 
+    try {
+        uploadResult = await upload.uploadImageBuffer(req.file.buffer);
+    } catch (error) {
 
-module.exports = { renderCreate }
+        res.render('error', { error: 'error on upload please try again after a while' });
+        return;
+    }
+
+    try {
+        req.body.user_id = 1;
+        req.body.recipe_image = uploadResult.url;
+        req.body.recipe_ingredients = req.body.recipe_ingredients.join('-');
+        req.body.public_id = uploadResult.public_id;
+
+        if (req.body.category_name != null) {
+            let id = await queries.insertCategory({ category_name: req.body.category_name, public_id: uploadResult.public_id });
+            req.body.category_id = id;
+        }
+
+        await queries.insertRecipe(req.body);
+        res.redirect('/create');
+    } catch (err) {
+        res.render('error', { error: 'there was a problem please try again later' });
+    }
+}
+
+module.exports = { renderCreateForm, handleCreateForm }

@@ -6,7 +6,8 @@
 
 .categories-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, 300px);
+    grid-template-columns: repeat(auto-fit, 295px);
+    justify-content: center;
     gap: 30px;
 }
 
@@ -20,11 +21,16 @@
     box-shadow: 10px 15px 25px var(--light-beige);
     text-align: center;
     cursor: pointer;
+    transition: transform 0.3s ease-in-out;
+}
+
+.category-card:hover {
+    transform: scale(1.01);
 }
 
 .category-image {
     width: 100%;
-    min-height: 300px;
+    height: 280px;
     object-fit: cover;
     grid-row: span 2;
 }
@@ -36,7 +42,7 @@
 }
 
 .category-name {
-    font-size: 1.8rem;
+    font-size: var(--xxl);
     padding: 10px 8px;
     color: white;
 }
@@ -52,5 +58,9 @@
 
     .section-title {
         font-size: 1.6rem;
+    }
+
+    :root {
+        --xxl: 1.4rem;
     }
 }

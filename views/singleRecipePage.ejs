@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/singleRecipePage.css">
+    <link rel="stylesheet" href="/css/all.min.css">
+    <link rel="stylesheet" href="/time.css">
+    <link rel="stylesheet" href="/icon.css">
+    <link rel="stylesheet" href="/header.css">
+    <link rel="stylesheet" href="/normal.css">
+</head>
+
+<body>
+
+    <%- include('./partials/header.ejs',{page:'single'}) %>
+        <div class="main-image-container">
+            <img class="main-image" src="<%- data.recipe_image%>" alt="">
+        </div>
+
+        <section>
+            <div class="wrapper">
+
+                <div class="name-time-wrapper">
+                    <h1>
+                        <%= data.recipe_name %>
+                    </h1>
+                    <%- include('./partials/time.ejs',{hours:data.hours,minuts:data.minuts})%>
+                </div>
+
+                <div class="user-info-wrapper">
+                    <%- include('./partials/icon.ejs')%>
+                        <p>Gordon Ramsay</p>
+                </div>
+
+                <div class="main-info-container">
+
+                    <div class="ingredients-container">
+                        <h1 class="ingredients-title">Ingredients</h1>
+                        <ul>
+                            <% data.recipe_ingredients.forEach(element=> { %>
+                                <li>
+                                    <%= element %>
+                                </li>
+
+                                <% }) %>
+                        </ul>
+
+                    </div>
+
+                    <div class="ingredients-container">
+                        <h1 class="ingredients-title">Instructions</h1>
+                        <p class="instructions-text">
+                            <%= data.recipe_instructions %>
+                        </p>
+                    </div>
+
+
+
+
+
+                </div>
+
+
+
+
+            </div>
+
+        </section>
+
+
+
+
+</body>
+
+</html>

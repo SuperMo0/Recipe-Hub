@@ -14,15 +14,15 @@ input {
 
 .input-label {
     display: block;
-    font-size: 1.8rem;
+    font-size: var(--xxl);
     margin-bottom: 5px;
 }
 
-input#recipe_title {
+input#recipe_name {
     border: 1px solid var(--brown-border);
     display: block;
     width: 100%;
-    font-size: 1.8rem;
+    font-size: var(--xl);
     padding: 5px;
 }
 
@@ -47,30 +47,39 @@ input#recipe_image {
 }
 
 .upload-text {
-    font-size: 1.8rem;
+    font-size: var(--xxl);
 }
 
 .upload-text>span {
-
     color: #D3692B;
+}
+
+.uploda-instructions {
+    font-size: 0.9rem;
+    font-weight: lighter;
 }
 
 input#hours,
 input#minuts {
     border: 1px solid var(--brown-border);
-    font-size: 30px;
+    font-size: var(--xl);
     width: 100px;
     padding: 10px;
 }
 
 .hours-label,
 .minuts-label {
-    font-size: 1.4rem;
+    font-size: var(--xl);
 }
 
-select#category {
+.time-input-wrapper {
+    display: flex;
+    gap: 10px;
+}
+
+select#category_id {
     width: 100%;
-    font-size: 1.9rem;
+    font-size: var(--xl);
     border: 1px solid var(--brown-border);
     cursor: pointer;
 }
@@ -81,18 +90,18 @@ option {
 
 .create-category-button {
     cursor: pointer;
-    font-size: 1rem;
+    font-size: var(--m);
 }
 
 input#category_name {
     border: 1px solid var(--brown-border);
     width: 50%;
-    font-size: 1.8rem;
+    font-size: var(--xl);
     padding: 5px;
 }
 
 .create-category-commit {
-    font-size: 1.8rem;
+    font-size: var(--xl);
     padding: 3px 10px;
     border: 1px solid var(--brown-border);
     cursor: pointer;
@@ -105,13 +114,13 @@ input#category_name {
 input#ingredient_name {
     border: 1px solid var(--brown-border);
     width: 55%;
-    font-size: 1.8rem;
+    font-size: var(--xl);
     padding: 5px;
 }
 
 .add-new-ingredient {
-    font-size: 1.2rem;
-    padding: 10px 10px;
+    font-size: var(--l);
+    padding: 10px;
     border-radius: 10px;
     border: 1px solid var(--brown-border);
     cursor: pointer;
@@ -125,7 +134,7 @@ input#ingredient_name {
 
 .single-ingredient {
     display: flex;
-    font-size: 1.5rem;
+    font-size: var(--xl);
     padding: 5px;
 }
 
@@ -146,4 +155,118 @@ ol hr {
 
 .order {
     margin-right: 5px;
+}
+
+#recipe_instructions {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    border: 1px solid var(--brown-border);
+    font-size: var(--xl);
+    min-height: 200px;
+    resize: none;
+    overflow: hidden;
+}
+
+.submit-button {
+    background-color: #D3692B;
+    color: white;
+    font-size: var(--xxl);
+    padding: 3px;
+    border-radius: 8px;
+    grid-column: span 2;
+    cursor: pointer;
+}
+
+.loading-page {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.312);
+}
+
+*[hide='true'] {
+    display: none;
+}
+
+.loader {
+    width: 50px;
+    height: 50px;
+    border: 5px solid orange;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+    border-top-color: transparent;
+    border-top-left-radius: 50%;
+    border-radius: 50%;
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    animation: loading 1s ease-in-out infinite;
+}
+
+@keyframes loading {
+    from {
+        transform: rotate(0turn);
+    }
+
+    to {
+        transform: rotate(1turn);
+
+    }
+
+}
+
+
+
+@media screen and (width<750px) {
+
+    :root {
+        --xxl: 1.3rem;
+        --xl: 1.2rem;
+        --l: 1.1rem;
+        --m: 1rem;
+    }
+
+    .add-new-ingredient {
+        padding: 3px;
+        font-size: 0.8rem;
+    }
+
+    input#hours,
+    input#minuts {
+        border: 1px solid var(--brown-border);
+        font-size: var(--xl);
+        width: 60px;
+        padding: 8px;
+    }
+
+    .create-recipe-grid {
+        gap: 20px;
+    }
+
+    .hours-label,
+    .minuts-label {
+        font-size: var(--xl);
+    }
+}
+
+@media screen and (width<550px) {
+
+
+    .create-recipe-grid {
+        gap: 15px;
+    }
+
+    .time-input-wrapper {
+        flex-direction: column;
+    }
+
+    .hours-label,
+    .minuts-label {
+        font-size: var(--l);
+    }
+
+
+
 }

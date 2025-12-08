@@ -2,9 +2,11 @@
     <div class="wrapper">
         <div class="header">
             <h1 class="logo">Recipe<span class="logo-second-half">Hub</span></h1>
-            <a href="" class="headerPage">Home</a>
-            <a href="" class="headerPage">Categories</a>
-            <a href="" class="headerPage">Add Recipe</a>
+            <div active="<%= page=='home' %>" class="nav-wrapper"><a href="/" class="headerPage">Home</a></div>
+            <div active="<%= page=='categories' %>" class="nav-wrapper"><a href="/categories"
+                    class="headerPage">Categories</a></div>
+            <div active="<%= page=='create' %>" class="nav-wrapper"><a href="/create" class="headerPage">Add Recipe</a>
+            </div>
             <div class="search-wrapper">
                 <i class="fa-solid fa-magnifying-glass"></i>
                 <input class="search" name="search" type="text" placeholder="Search Recipes">

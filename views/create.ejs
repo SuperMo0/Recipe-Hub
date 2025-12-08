@@ -14,19 +14,21 @@
 </head>
 
 <body>
-    <%- include('./partials/header.ejs') %>
+    <%- include('partials/header.ejs',{page:'create'}) %>
 
+        <div hide="true" class="loading-page">
+            <div class="loader"></div>
+        </div>
         <section>
             <div class="wrapper">
                 <h1 class="section-title">Add a New Recipe</h1>
 
-                <form class="create-recipe-grid">
+                <form class="create-recipe-grid" method="post" action="/create" enctype="multipart/form-data">
 
-
-                    <div class="recipe-title-container">
-                        <label class="input-label" for="recipe_title">Recipe Title</label>
-                        <input placeholder="e.g., Grandma's Apple Pie" type="text" name="recipe_title"
-                            id="recipe_title">
+                    <div class=" recipe-title-container">
+                        <label class="input-label" for="recipe_name">Recipe Title</label>
+                        <input required maxlength="100" placeholder="e.g., Grandma's Apple Pie" type="text"
+                            name="recipe_name" id="recipe_name">
                     </div>
 
                     <div class="recipe-image-container">
@@ -34,19 +36,28 @@
                         <label class="upload-container" for="recipe_image">
                             <i class="fa-solid fa-upload"></i>
                             <p class="upload-text">Drag and Drop or <span>Upload Photo</span> </p>
+                            <p class="uploda-instructions"> .png .jpeg .jpeg Max size 2MB</p>
                             <p class="uploaded-file-name"></p>
                         </label>
-                        <input type="file" name="recipe_image" id="recipe_image">
+                        <input onchange="validateUpload(this)" type="file" name="recipe_image" id="recipe_image"
+                            accept="image/png, image/jpeg">
                     </div>
 
                     <div class="preperation-time-container">
                         <p class="input-label">Preperation Time</p>
 
-                        <input value="0" type="number" id="hours" name="hours">
-                        <label class="hours-label" for="hours">Hours</label>
+                        <div class="time-input-wrapper">
+                            <div class="hours-wrapper">
+                                <input required value="0" type="number" id="hours" name="hours">
+                                <label class="hours-label" for="hours">Hours</label>
+                            </div>
+                            <div class="minuts-wrapper">
+                                <input required value="0" onchange="fix()" type="number" id="minuts" name="minuts"
+                                    max="59">
+                                <label class="minuts-label" for="minuts">Minuts</label>
+                            </div>
+                        </div>
 
-                        <input onchange="fix()" type="number" id="minuts" name="minus" max="59">
-                        <label class="minuts-label" for="minuts">Minuts</label>
                         <script>
                             function fix() {
                                 let input = document.getElementById('minuts');
@@ -56,19 +67,25 @@
                     </div>
 
                     <div class="category-container">
-                        <label for="category" class="input-label">Category</label>
-                        <select name="category" id="category">
-                            <option value="">Italian</option>
-                            <option value="">Middle East</option>
-                            <option value="">Pasta</option>
+                        <label for="category_id" class="input-label">Category</label>
+                        <select name="category_id" id="category_id">
+
+                            <% categories.forEach(element=> { %>
+                                <option value="<%= element.id %>">
+                                    <%= element.category_name %>
+                                </option>
+                                <% }) %>
+
                         </select>
-                        <p class="create-category-button">+ create new category</p>
+                        <p onclick="showNewCategory(this)" class="create-category-button">+ create new category</p>
                     </div>
 
                     <div class="new-category-container">
                         <label for="category_name" class="input-label">New Category</label>
-                        <input placeholder="Category" type="text" id="category_name" form="create-category-form">
-                        <button class="create-category-commit" type>create</button>
+                        <input required disabled name="category_name" placeholder="Category" type="text"
+                            id="category_name">
+                        <button onclick="hideNewCategory(this)" type="button"
+                            class="create-category-commit">cancel</button>
                     </div>
 
                     <div class="ingredient-container">
@@ -82,7 +99,7 @@
                                 <div class="single-ingredient-wrapper">
                                     <li class="single-ingredient">
                                         <span class="order"></span>
-                                        <input readonly type="text" name="ingredients[]">
+                                        <input readonly type="text" name="recipe_ingredients[]">
                                         <i class="fa-solid fa-trash-can"></i>
                                     </li>
                                     <hr>
@@ -91,6 +108,14 @@
                         </ol>
 
                     </div>
+
+                    <div class="recipe-instructions-container">
+                        <label class="input-label" for="recipe_instructions">Instructions</label>
+                        <textarea required oninput="fixHeight(this)" name="recipe_instructions"
+                            id="recipe_instructions"></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-button">Publish Recipe</button>
 
                 </form>
 

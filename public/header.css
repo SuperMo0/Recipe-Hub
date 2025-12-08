@@ -7,7 +7,24 @@ header {
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    padding: 20px 0px;
+    height: 65px;
+    /* padding: 20px 0px; */
+}
+
+.headerPage {
+    font-size: var(--xl);
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav-wrapper {
+    align-self: stretch;
+    display: grid;
+    place-items: center;
+}
+
+[active="true"] {
+    border-bottom: 3px solid orange;
 }
 
 .search {
@@ -23,11 +40,6 @@ header {
 
 .logo-second-half {
     color: #D3692B;
-}
-
-.header a {
-    white-space: nowrap;
-    font-size: 1.2rem;
 }
 
 .search-wrapper {

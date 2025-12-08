@@ -35,3 +35,66 @@ function setName(node, num, value) {
     input.style.width = `${value.length}ch`;
     input.setAttribute('value', value);
 }
+
+function fixHeight(element) {
+    if (element.value == '') element.style.height = '200px';
+    if (element.style.height.slice(0, -2) > element.scrollHeight) return;
+    element.style.height = element.scrollHeight + 'px';
+}
+
+
+
+
+const createCategory = document.querySelector('.new-category-container');
+const selectCategory = document.querySelector('.category-container');
+function showNewCategory(element) {
+    selectCategory.style.display = 'none'
+    let select = selectCategory.querySelector('select')
+    select.setAttribute('disabled', 'true');
+    createCategory.style.display = 'block';
+    let newInput = createCategory.querySelector('input');
+    newInput.removeAttribute('disabled');
+}
+
+function hideNewCategory(element) {
+    createCategory.style.display = 'none';
+    selectCategory.style.display = 'block';
+    let select = selectCategory.querySelector('select')
+    select.removeAttribute('disabled');
+    let newInput = createCategory.querySelector('input');
+    newInput.setAttribute('disabled', 'true');
+}
+
+uploadName = document.querySelector('.uploaded-file-name');
+
+function validateUpload(input) {
+    let file = input.files[0];
+    if (file.size > 1000 * 1000 * 2) {
+        alert('file size is more than 2M please choose smaller');
+        input.value = '';
+    }
+    else if (file.type != 'image/png' && file.type != 'image/jpeg' && file.type != 'image/jpg') {
+        alert('wrong file format');
+        input.value = '';
+    }
+    else {
+        let image = new Image();
+        image.src = URL.createObjectURL(input.files[0]);
+        image.onload = () => {
+            if (image.width < 900 || image.height < 300) {
+                input.value = '';
+                alert('image should be at least 900px and height 300px');
+            }
+            uploadName.textContent = input.files[0].name;
+        }
+    }
+}
+
+const form = document.querySelector('.create-recipe-grid');
+const submit = document.querySelector('.submit-button');
+const loading = document.querySelector('.loading-page')
+form.addEventListener('submit', (e) => {
+    submit.setAttribute('disabled', 'true');
+    loading.setAttribute('hide', 'false');
+    // e.preventDefault();
+})

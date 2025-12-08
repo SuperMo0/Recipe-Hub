@@ -4,18 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/home.css">
+    <link rel="stylesheet" href="/category.css">
     <link rel="stylesheet" href="/css/all.min.css">
     <link rel="stylesheet" href="/time.css">
     <link rel="stylesheet" href="/icon.css">
     <link rel="stylesheet" href="/header.css">
     <link rel="stylesheet" href="/normal.css">
-    <script src="/homeScript.js" defer></script>
+    <script src="/categoryScript.js" defer></script>
     <title>Document</title>
 </head>
 
 <body>
-    <%- include('partials/header.ejs',{page:'home'}) %>
+    <%- include('partials/header.ejs',{page:'none'}) %>
 
         <section>
             <div class="wrapper">
@@ -24,10 +24,8 @@
 
                     <% recipes.forEach(element=> { %>
                         <div data-id="<%= element.id %>" class="recipe-card">
-                            <div class="recipe-image-wrapper">
-                                <img class='recipe-image' src=<%=element.recipe_image %> alt="The Main Dish">
-                            </div>
-
+                            <img class='recipe-image' src=<%=element.recipe_image %>
+                            alt="The Main Dish">
                             <p class="recipe-name">
                                 <%= element.recipe_name%>
                             </p>
