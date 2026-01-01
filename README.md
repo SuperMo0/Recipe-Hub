@@ -13,9 +13,9 @@
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 
 ![ALT TEXT](./project-images/image1.png)
-![ALT TEXT](./public/image3.png)
-![ALT TEXT](./public/image2.png)
-![ALT TEXT](./public/image4.png)
+![ALT TEXT](./project-images/image3.png)
+![ALT TEXT](./project-images/image2.png)
+![ALT TEXT](./project-images/image4.png)
 
 ## ✨ Key Features
 
