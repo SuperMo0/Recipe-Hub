@@ -1,6 +1,6 @@
 # 🍳 Recipe Hub
 
-** Recipe Hub** is a  recipe web application Built as part of my Full stack learning journey 
+ a recipe web application Built as part of my Full stack learning journey 
 
 ## 🚀 Tech Stack
 
